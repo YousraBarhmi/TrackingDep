@@ -1,0 +1,2 @@
+[server]
+pre_launch_script = "setup.sh"
