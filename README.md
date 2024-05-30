@@ -1,5 +1,4 @@
 # webcam-streaming
-<img src="0001.jpg"/>
 
 <h1>Requirements</h1>
 <code>pip install streamlit-webrtc</code><br>
