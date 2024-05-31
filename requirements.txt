@@ -4,5 +4,3 @@ opencv-python-headless
 av
 numpy
 mediapipe
-cv2
-math
