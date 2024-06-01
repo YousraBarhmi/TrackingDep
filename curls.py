@@ -42,7 +42,7 @@ def run_tracking_curls():
                     per = (per1 + per2) / 2
                     bar = np.interp(per, (0, 100), (650, 100))
 
-                    color = (255, 0, 255)
+                    color = (0, 140, 255)
                     if 95 <= per <= 100:
                         color = (0, 255, 0)
                         if dir == 0:
@@ -73,14 +73,14 @@ def run_tracking_curls():
 
                     cv2.putText(img, f'{int(per)} %', (w-90, 80), cv2.FONT_HERSHEY_PLAIN, 2, color, 2)
                     cv2.rectangle(img, (0, 550), (150, 700), (0, 255, 0), cv2.FILLED)
-                    cv2.putText(img, str(int(count)), (10, h-30), cv2.FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
+                    cv2.putText(img, str(int(count)), (10, h-30), cv2.FONT_HERSHEY_PLAIN, 5, (0, 140, 255), 5)
 
                     for i, feedback in enumerate(feedback):
                         cv2.putText(img, feedback, (50, 200 + i * 30), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
 
             return av.VideoFrame.from_ndarray(img, format='bgr24')
 
-    st.title("Webcam Face and Pose Detection")
+    st.markdown("<h3> Bicep Curls Tracker</h3>", unsafe_allow_html=True)
 
     rtc_configuration = RTCConfiguration(
         {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
