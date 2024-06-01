@@ -43,11 +43,6 @@ def run_tracking_bar():
 
             per = (per1 + per2) / 2
             # print("back_angle : " + back_angle)
-            print("back_angle : " + str(back_angle))
-            # print("knee_angle : " + knee_angle)
-            print("knee_angle : " + str(knee_angle))
-            print(per)
-            print(bar)
             color = (255, 0, 255)
             if 95 <= per <= 100 :
                 color = (0, 255, 0)
