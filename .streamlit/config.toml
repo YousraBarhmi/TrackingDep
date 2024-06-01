@@ -1,2 +1,8 @@
 [server]
-pre_launch_script = "setup.sh"
+headless = true
+
+[server.fileWatcherType]
+type = "none"
+
+[general]
+prelaunch = "setup.sh"
