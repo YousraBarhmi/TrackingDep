@@ -23,10 +23,9 @@ def run_tracking_curls():
             gray = cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY)
             faces = cascade.detectMultiScale(gray, 1.1, 3)
 
-            # for (x, y, w, h) in faces:
-            #     cv2.rectangle(frm, (x, y), (x + w, y + h), (0, 255, 0), 3)
-
             img = detector.findPose(frm, True)
+            (h, w) = img.shape[:2]
+
             lmList = detector.findPosition(img, False)
 
             if len(lmList) != 0:
@@ -67,19 +66,17 @@ def run_tracking_curls():
                     elif angle2 < 20: 
                         feedback.append('Left arm: too low')
                         color = (0, 0, 255)
-                    if feedback:
-                        cv2.putText(img, f'{str(feedback)}', (10, 75), cv2.FONT_HERSHEY_PLAIN, 2, color, 2)
 
-                    cv2.rectangle(img, (1100, 100), (img.shape[1] - 60, img.shape[0] - 20), color, 3)
-                    cv2.rectangle(img, (1100, int(bar)), (img.shape[1] - 60, img.shape[0] - 20), color, cv2.FILLED)
-                    cv2.putText(img, f'{int(per)} %', (img.shape[1] - 120, 75), cv2.FONT_HERSHEY_PLAIN, 4, color, 4)
-                    cv2.rectangle(img, (0, 450), (250, 720), (0, 255, 0), cv2.FILLED)
-                    cv2.putText(img, str(int(count)), (45, img.shape[0] - 40), cv2.FONT_HERSHEY_PLAIN, 15, (255, 0, 0), 25)
+                    # Dessiner la barre de progression
+                    cv2.rectangle(img, (w-40, 100), (w-20, h-20), color, 3)
+                    cv2.rectangle(img, (w-40, int(bar)), (w-20, h-20), color, thickness=cv2.FILLED, lineType=cv2.LINE_AA)
 
-            cTime = time.time()
-            fps = 1 / (cTime - pTime)
-            pTime = cTime
-            cv2.putText(img, str(int(fps)), (50, 100), cv2.FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
+                    cv2.putText(img, f'{int(per)} %', (w-90, 80), cv2.FONT_HERSHEY_PLAIN, 2, color, 2)
+                    cv2.rectangle(img, (0, 550), (150, 700), (0, 255, 0), cv2.FILLED)
+                    cv2.putText(img, str(int(count)), (10, h-30), cv2.FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
+
+                    for i, feedback in enumerate(feedback):
+                        cv2.putText(img, feedback, (50, 200 + i * 30), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
 
             return av.VideoFrame.from_ndarray(img, format='bgr24')
 
