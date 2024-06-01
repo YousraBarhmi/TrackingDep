@@ -1,8 +1,2 @@
 [server]
 headless = true
-
-[server.fileWatcherType]
-type = "none"
-
-[general]
-prelaunch = "setup.sh"
