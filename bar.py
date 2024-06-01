@@ -74,8 +74,8 @@ def run_tracking_bar():
                     feedback.append('Knees: too bent')
                     color = (0, 0, 255)
 
-                if feedback:
-                    cv2.putText(img, f'{str(feedback)}', (10, 75), cv2.FONT_HERSHEY_PLAIN, 2, color, 2)
+                for i, feedback in enumerate(feedback):
+                        cv2.putText(img, feedback, (50, 200 + i * 30), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
 
                 # Dessiner la barre de progression
                 cv2.rectangle(img, (w-40, 100), (w-20, h-20), color, 3)
