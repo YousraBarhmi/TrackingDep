@@ -2,12 +2,45 @@ import streamlit as st
 from streamlit_webrtc import webrtc_streamer, RTCConfiguration
 
 def main():
+    # Add custom CSS
+    custom_css = """
+    <style>
+        /* Set the background color to black */
+        .stApp, .MuiBox-root{
+            background-color: rgb(3, 20, 38);
+        }
+        
+        /* Style the logo and title */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;  /* Set the text color to white */
+        }
+
+        .header-container img {
+            margin-right: 20px;
+        }
+        
+        .header-container h1, h3 {
+            color : white;
+            margin: 0;
+        }
+
+        hr{
+        background-color: white;
+        }
+        
+    </style>
+    """
+    st.markdown(custom_css, unsafe_allow_html=True)
+
     # Add a logo and title to the header
     st.markdown(
         """
-        <div style="display: flex; align-items: center; justify-content: center;">
-            <img src="data:image/png;base64,{logo}" width="80" style="margin-right: 20px;">
-            <h1 style="margin: 0;">FitAI</h1>
+        <div class="header-container">
+            <img src="data:image/png;base64,{logo}" width="80">
+            <h1>FitAI</h1>
         </div>
         <hr>
         """.format(logo=load_logo()),
