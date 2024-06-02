@@ -8,8 +8,6 @@ import time
 import PoseModule as pm
 
 def run_tracking_katt():
-    # Load the Haar Cascade for face detection
-    cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
     detector = pm.poseDetector()
     count = 0
     dir = 0
@@ -21,7 +19,6 @@ def run_tracking_katt():
 
             frm = frame.to_ndarray(format="bgr24")
             gray = cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY)
-            faces = cascade.detectMultiScale(gray, 1.1, 3)
 
 
             img = detector.findPose(frm, True)

@@ -8,8 +8,6 @@ import time
 import PoseModule as pm
 
 def run_tracking_curls():
-    # Load the Haar Cascade for face detection
-    cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
     detector = pm.poseDetector()
     count = 0
     dir = 0
@@ -21,7 +19,6 @@ def run_tracking_curls():
 
             frm = frame.to_ndarray(format="bgr24")
             gray = cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY)
-            faces = cascade.detectMultiScale(gray, 1.1, 3)
 
             img = detector.findPose(frm, True)
             (h, w) = img.shape[:2]
@@ -85,7 +82,7 @@ def run_tracking_curls():
     rtc_configuration = RTCConfiguration(
         {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
     )
-
+    
     webrtc_streamer(key="example", video_processor_factory=VideoProcessor, rtc_configuration=rtc_configuration)
 
 if __name__ == "__main__":
